@@ -1,1 +1,2 @@
-"# Apache tika + java-diff-utils + diff2html" 
+"# Apache tika + java-diff-utils + diff2html"
+Examples to follow
