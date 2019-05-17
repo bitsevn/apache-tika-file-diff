@@ -1,0 +1,98 @@
+System Goals -
+
+- Allow users to run Stress for  a set of parameters for the command line tool or ui
+- persists Stress run information permanently so that it can be used to generate statistics in the future
+- after Stress is run, it should present users with run stats like total items ran, failed, success, with diff,
+w/o diff, time taken, file names, file size, etc.
+- i/p parameters for the Stress are:
+    parent ids, item ids, item types, file types, item versions, status and other parameters
+- after the Stress users should be able to see the side-by-side or line-by-line differences between original
+version of a data set and revised version of a data set
+- Stress could be run against any data set like files (pdf, txt, csv, xls(x), jpeg, jpg, mht, doc(x), ppt(x), etc.)
+- users should be able to track the Stress progress on the ui or command line
+
+Stress Tool -
+Source (Generate) -> Extract (Apache Tika) -> Diff (java-diff-utils) -> Show (diff2html)
+
+Stress Interface:
+
+Types of Stress: systems1, systems2, systems3
+
+List of Stress: All(10), Completed(8), Running(1), Failed(1)
+
+Inside a Stress:
+- Stress title:
+- Stress type: systems1 | systems2 | systems3
+- original codebase: current version
+- revised codebase: revised version
+
+Stress info:
+stress_id, ran_by, started_at, finished_at, time_taken, targeted_items(100),
+completed(<count>), running(<count>), yet_to_run(<count>), failed(<count>), with_diff(<count>),
+without_diff(<count>)
+
+-------------------
+Diff info:
+-------------------
+
+Layout ->
+---------
+
+item_name/item_id   | show details (hyperlink)
+-----------------     ------------
+original(204kb) | revised(205kb) | +2, -1
+
+Nav ->
+-------
+item_name/item_id (hyperlink)  -> on click, shows side-by-side/line-by-line diff
+show details (hyperlink)  -> on click, opens popup with item details
+original(204kb)  -> on click, downloads the original file
+revised(205kb)   -> on click, downloads the revised file
+
+------------------------------------------------------
+Folder structure:
+                                    -> original_file
+stress_id -> run_id -> file_id |
+                                    -> revised_file
+
+Database schema (tables):
+
+stress -
+-------------
+stress_id
+stress_name
+target_system
+original_codebase
+revised_codebase
+ran_by
+created_at
+started_at
+finished_at
+status
+
+stress_config -
+-------------------
+stress_id
+duration
+parent_id
+item_version
+item_type
+item_events
+item_file_type
+
+stress_run -
+run_id
+run_desc (can be auto-generated too)
+stress_id
+started_at
+finished_at
+started_by
+
+stress_run_config -
+-----------------------------
+run_id
+item_id
+status (running,not_started,failed,success(with_diff|without_diff))
+failure_desc
+started_at
+finished_at
