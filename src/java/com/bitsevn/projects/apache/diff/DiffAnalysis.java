@@ -17,7 +17,7 @@ public class DiffAnalysis {
     private static final String PATH = "D:\\code\\java\\ApacheTika\\docs\\";
 
     public static void main(String[] args) throws IOException, DiffException, TikaException, SAXException {
-        computeUnifiedDiff("file-graph-original.pdf", "file-graph-revised.pdf");
+        computeUnifiedDiff("docs/file-graph-original.pdf", "docs/file-graph-revised.pdf");
     }
 
     public static void computeUnifiedDiff(String original, String revised) throws DiffException, IOException, TikaException, SAXException {

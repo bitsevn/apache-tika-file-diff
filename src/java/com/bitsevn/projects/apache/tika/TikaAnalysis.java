@@ -20,7 +20,7 @@ public class TikaAnalysis {
     private static final String PATH = "D:\\code\\java\\ApacheTika\\docs\\";
 
     public static void main(String[] args) throws TikaException, IOException, SAXException {
-        System.out.println(extractContentUsingParser(getInputStream("file-xml.xml")));
+        System.out.println(extractContentUsingParser(getInputStream("docs/file-xml.xml")));
     }
 
     public static InputStream getInputStream(String fileName) {

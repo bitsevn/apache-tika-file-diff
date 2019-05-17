@@ -12,7 +12,7 @@ public class TikaAnalysisTest {
     public void whenUsingDetector_thenDocumentTypeIsReturned()
             throws IOException {
         InputStream stream = this.getClass().getClassLoader()
-                .getResourceAsStream("file-pdf.pdf");
+                .getResourceAsStream("docs/file-pdf.pdf");
         String mediaType = TikaAnalysis.detectDocTypeUsingDetector(stream);
 
         Assert.assertEquals("application/pdf", mediaType);
